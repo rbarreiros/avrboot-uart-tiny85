@@ -25,6 +25,8 @@
  * Changes:
  * 02-10-2012 - Rui Barreiros
  * - Implementation, lot's of glueing around and fixes
+ * 05-10-2012 - Rui Barreiros
+ * - Proper watchdog disable at boot start
  *
  */
 
@@ -383,7 +385,10 @@ int main(void)
   uint8_t doBoot = 0;
   pagebuf_t size;
 
+  wdt_reset();
+  MCUSR = 0;
   wdt_disable();
+
   fixVectors();
   swuartInit();
 
